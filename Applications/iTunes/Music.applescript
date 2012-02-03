@@ -1,0 +1,1 @@
+tell application "iTunes" to set view of (browser window 1) to user playlist 1
