@@ -1,6 +1,8 @@
 (*
 -- Group Selected Files
 -- Move selected files in Finder into a new subdirectory
+--
+-- @author Scott Buchanan <buchanan.sc@gmail.com>
 *)
 
 tell application "Finder"
@@ -14,5 +16,4 @@ tell application "Finder"
 	set _folder to make new folder at _new
 	move _files to _folder
 	set selection to _folder
-	--select _folder
 end tell

@@ -2,7 +2,6 @@
 -- Crush Images
 --
 -- @author Scott Buchanan <buchanan.sc@gmail.com>
--- @copyright 2012 Scott Buchanan
 *)
 
 property lib : load script POSIX path of (path to scripts folder) & "lib/lib.scpt"

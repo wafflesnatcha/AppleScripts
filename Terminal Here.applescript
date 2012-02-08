@@ -1,11 +1,14 @@
 (*
--- Terminal Here.applescript
+-- Terminal Here
 -- Open Terminal at the path of the frontmost finder window
+--
 -- For TotalTerminal (http://totalterminal.binaryage.com) support,
 -- "Show on Reopen" must be checked in the TotalTerminal Preferences.
+--
+-- @author Scott Buchanan <buchanan.sc@gmail.com>
 *)
 
-property lib : load script (POSIX path of (path to scripts folder) & "lib/lib.scpt")
+property lib : load script POSIX path of (path to scripts folder) & "lib/lib.scpt"
 property Terminal : include("Application/Terminal") of lib
 
 on run argv

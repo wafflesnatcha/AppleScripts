@@ -1,6 +1,8 @@
 (*
 -- Change Icon
 -- Change the icon of selected Finder items
+--
+-- @author Scott Buchanan <buchanan.sc@gmail.com>
 *)
 
 property _bin : missing value
@@ -21,14 +23,21 @@ on process(argv)
 	end if
 	if (count of _files) is less than 1 then return
 	
-	set _icon to choose file
-	set _icon_path to (quoted form of POSIX path of _icon)
-	
 	if _bin is missing value then
-		set _bin to do shell script "bash -lc 'which seticon'"
-		if _bin is "" then return
+		try
+			set _bin to do shell script "bash -lc 'which seticon'"
+		end try
+		
+		if _bin is missing value or _bin is "" then
+			display alert "Error" message "seticon not found" as warning buttons {"OK"} default button 1
+			return
+		end if
+		
 		set _bin to quoted form of _bin
 	end if
+	
+	set _icon to choose file
+	set _icon_path to (quoted form of POSIX path of _icon)
 	
 	set _flags to ""
 	tell application "Finder"

@@ -1,3 +1,9 @@
+(*
+-- Frontmost Application
+-- View the properties of the frontmost application process
+--
+-- @author Scott Buchanan <buchanan.sc@gmail.com>
+*)
 property lib : load script (POSIX path of (path to scripts folder) & "lib/lib.scpt")
 
 property application_process_properties : {"accepts high level events", "accepts remote events", "accessibility description", "application file", "architecture", "background only", "bundle identifier", "class", "Classic", "creator type", "description", "displayed name", "enabled", "entire contents", "file type", "file", "focused", "frontmost", "has scripting terminology", "help", "id", "maximum value", "minimum value", "name", "orientation", "partition space used", "position", "role description", "role", "selected", "short name", "size", "subrole", "title", "total partition size", "unix id", "value", "visible"}
@@ -9,9 +15,21 @@ end run
 on process(argv)
 	set _process to frontmostApplicationProcess() of _UI of lib
 	set output to probeApplicationProcess(_process)
-	tell _CocoaDialog of lib to textbox({title:name of _process, |text|:output})
+	my outputTextEdit(output)
+	-- tell _CocoaDialog of lib to textbox({title:name of _process, |text|:output})
 end process
 
+on outputTextEdit(output)
+	if application "TextEdit" is running then
+		tell application "TextEdit" to make new document at the end of documents of it
+	end if
+	
+	tell application "TextEdit"
+		get properties of front document
+		set text of front document to output
+		activate
+	end tell
+end outputTextEdit
 
 on probeApplicationProcess(_process)
 	set output to ""

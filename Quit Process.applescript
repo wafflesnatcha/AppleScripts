@@ -1,9 +1,11 @@
 (*
 -- Quit Processes.scpt
 -- Select from a list of running processes to quit
+--
+-- @author Scott Buchanan <buchanan.sc@gmail.com>
 *)
 
-property lib : load script (POSIX path of (path to scripts folder) & "lib/lib.scpt")
+property lib : load script POSIX path of (path to scripts folder) & "lib/lib.scpt"
 property last_processes : missing value
 
 on run argv

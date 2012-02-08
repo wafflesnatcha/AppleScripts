@@ -1,9 +1,11 @@
 (*
 -- Snaps the window to the edge of the screen
 -- then resizes it to 50% of the screen' width and height
+--
+-- @author Scott Buchanan <buchanan.sc@gmail.com>
 *)
 
-property lib : load script (POSIX path of (path to scripts folder) & "lib/lib.scpt")
+property lib : load script POSIX path of (path to scripts folder) & "lib/lib.scpt"
 
 -- The width & height of the resulting window as a percentage of the available screen
 property _size : {width:0.5, height:0.5}

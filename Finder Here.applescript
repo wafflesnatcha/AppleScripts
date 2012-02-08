@@ -1,9 +1,11 @@
 (*
 -- Finder Here
 -- Open a Finder window at the frontmost window's current document
+--
+-- @author Scott Buchanan <buchanan.sc@gmail.com>
 *)
 
-property lib : load script (POSIX path of (path to scripts folder) & "lib/lib.scpt")
+property lib : load script POSIX path of (path to scripts folder) & "lib/lib.scpt"
 
 on run argv
 	my process(argv)

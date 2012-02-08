@@ -1,6 +1,8 @@
 (*
 -- Compress with Keka
 -- Takes the selected files in Finder and sends them to keka
+--
+-- @author Scott Buchanan <buchanan.sc@gmail.com>
 *)
 
 on run argv

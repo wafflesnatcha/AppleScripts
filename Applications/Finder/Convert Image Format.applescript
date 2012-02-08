@@ -1,6 +1,8 @@
 (*
 -- Convert Image Format
 -- Convert selected images in Finder between various image formats
+--
+-- @author Scott Buchanan <buchanan.sc@gmail.com>
 *)
 
 property lib : load script POSIX path of (path to scripts folder) & "lib/lib.scpt"
@@ -48,9 +50,7 @@ on process(argv)
 			set _name to name of (f as alias)
 			set _ext to name extension of (f as alias)
 			
-			if length of _ext > 0 then
-				set _name to text 1 thru ((length of _name) - (length of _ext) - 1) of _name as text
-			end if
+			if length of _ext > 0 then set _name to text 1 thru ((length of _name) - (length of _ext) - 1) of _name as text
 			
 			set _path to POSIX path of (container of f as alias)
 			

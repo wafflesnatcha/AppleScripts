@@ -1,6 +1,8 @@
 (*
 -- Edit with TextMate
 -- Open the selected Finder items in TextMate
+--
+-- @author Scott Buchanan <buchanan.sc@gmail.com>
 *)
 
 property mate : "Contents/Resources/mate"

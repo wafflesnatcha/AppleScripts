@@ -1,6 +1,8 @@
 (*
 -- Resize Image
 -- Resizes selected images in Finder
+--
+-- @author Scott Buchanan <buchanan.sc@gmail.com>
 *)
 
 property _size : ""

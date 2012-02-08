@@ -1,12 +1,14 @@
 (*
 -- Append Date to File Name
 -- Adds the current date to the end of the selected file name (before the extension)
+--
+-- @author Scott Buchanan <buchanan.sc@gmail.com>
 *)
 
 property lib : load script POSIX path of (path to scripts folder) & "lib/lib.scpt"
 
 property date_separator : "-"
-property date_prefix : "_"
+property date_prefix : "-"
 
 on run argv
 	my process(argv)

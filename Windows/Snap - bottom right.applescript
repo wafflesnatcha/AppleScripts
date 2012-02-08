@@ -1,8 +1,10 @@
 (*
 -- Snaps the window to the edge of the screen
+--
+-- @author Scott Buchanan <buchanan.sc@gmail.com>
 *)
 
-property lib : load script (POSIX path of (path to scripts folder) & "lib/lib.scpt")
+property lib : load script POSIX path of (path to scripts folder) & "lib/lib.scpt"
 
 on run argv
 	tell application "System Events"

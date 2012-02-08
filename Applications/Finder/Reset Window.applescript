@@ -1,6 +1,8 @@
 (*
 -- Reset Window
--- Restore layout settings of finder windows
+-- Restore custom layout settings of finder windows
+--
+-- @author Scott Buchanan <buchanan.sc@gmail.com>
 *)
 
 property lib : load script POSIX path of (path to scripts folder) & "lib/lib.scpt"
