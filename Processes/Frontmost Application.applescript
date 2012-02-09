@@ -19,14 +19,10 @@ on process(argv)
 	-- tell _CocoaDialog of lib to textbox({title:name of _process, |text|:output})
 end process
 
-on outputTextEdit(output)
-	if application "TextEdit" is running then
-		tell application "TextEdit" to make new document at the end of documents of it
-	end if
-	
+on outputTextEdit(_content)
+	if application "TextEdit" is running then tell application "TextEdit" to make new document at the end of documents of it
 	tell application "TextEdit"
-		get properties of front document
-		set text of front document to output
+		set text of front document to _content
 		activate
 	end tell
 end outputTextEdit
