@@ -16,7 +16,6 @@ on process(argv)
 	set _process to frontmostApplicationProcess() of _UI of lib
 	set output to probeApplicationProcess(_process)
 	my outputTextEdit(output)
-	-- tell _CocoaDialog of lib to textbox({title:name of _process, |text|:output})
 end process
 
 on outputTextEdit(_content)
