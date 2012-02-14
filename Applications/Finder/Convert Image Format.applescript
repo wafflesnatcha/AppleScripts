@@ -8,8 +8,8 @@
 property lib : load script POSIX path of (path to scripts folder) & "lib/lib.scpt"
 
 property script_name : missing value
-property _formats : {"BMP", "GIF", "ICNS", "JPEG", "JPEG2", "PICT", "PNG", "PSD", "TGA", "TIFF"}
-property _formats_ext : {".bmp", ".gif", ".icns", ".jpg", ".jp2", ".pict", ".png", ".psd", ".tga", ".tif"}
+property _formats : {"BMP", "GIF", "ICNS", "ICO", "JPEG", "JPEG2", "PDF", "PICT", "PNG", "PSD", "TGA", "TIFF"}
+property _formats_ext : {".bmp", ".gif", ".icns", ".ico", ".jpg", ".jp2", ".pdf", ".pict", ".png", ".psd", ".tga", ".tif"}
 property _last_format : missing value
 property _last_quality : 60
 
