@@ -126,6 +126,7 @@ on ImageMagick(_src, _dest, f)
 	set _opts to ""
 	
 	if f = "JPEG" then set _opts to _opts & " -quality " & (my getQuality())
+	if f = "PNG" then set _opts to _opts & " -background transparent"
 	
 	set _cmd to "bash -lc \"convert " & _in & " " & _opts & " " & _out & "\""
 	try
