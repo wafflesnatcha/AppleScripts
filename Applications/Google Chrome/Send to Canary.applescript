@@ -1,5 +1,7 @@
 try
-	tell application "Google Chrome" to set _url to URL of active tab of first window
+	using terms from application "Google Chrome"
+		tell application (path to frontmost application as Unicode text) to set _url to URL of active tab of first window
+	end using terms from
 	tell application "Google Chrome Canary"
 		activate
 		open location _url
