@@ -28,6 +28,6 @@ on process(argv)
 	
 	if _pathnames is "" then return
 	
-	set _script to "open -a Keka " & _pathnames & " --args -action 2"
+	set _script to "open -a Keka " & _pathnames & " --args -action 2 &>/dev/null &"
 	do shell script _script
 end process
