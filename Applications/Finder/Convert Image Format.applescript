@@ -125,7 +125,11 @@ on ImageMagick(_src, _dest, f)
 	set _out to quoted form of _dest
 	set _opts to ""
 	
-	if f = "JPEG" then set _opts to _opts & " -quality " & (my getQuality())
+	if f = "JPEG" and not (my getQuality() as string = "false") then
+		set _opts to _opts & " -quality " & result
+	else
+		return false
+	end if
 	if f = "PNG" then set _opts to _opts & " -background transparent"
 	
 	set _cmd to "bash -lc \"convert " & _in & " " & _opts & " " & _out & "\""
