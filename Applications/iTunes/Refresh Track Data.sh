@@ -8,7 +8,6 @@ input=$(osascript -ss -e 'tell application "iTunes" to return selection as list'
 total_lines=$(echo "$input" | wc -l)
 
 cocoadialog="$(which CocoaDialog 2>/dev/null)"
-[[ ! $cocoadialog ]] && FAIL "pngcrush not found"
 
 ( echo "$input" | { while read line; do
 	(( count++ ))
