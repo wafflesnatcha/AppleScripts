@@ -25,13 +25,29 @@ on process(argv)
 		end try
 		
 		set _settings to {current view:missing value Â
-			, zoomed:true Â
 			, sidebar width:136 Â
 			, statusbar visible:true Â
 			, toolbar visible:true Â
-			, list view options:{calculates folder sizes:false, shows icon preview:true, icon size:small, text size:11, uses relative dates:true} Â
-			, column view options:{text size:11, shows icon:true, shows icon preview:true, shows preview column:true, discloses preview pane:true} Â
-			, icon view options:{arrangement:arranged by name, icon size:72, shows item info:false, shows icon preview:true, text size:11, label position:bottom} Â
+			, zoomed:true Â
+			, list view options:{calculates folder sizes:false Â
+			, icon size:small Â
+			, shows icon preview:true Â
+			, text size:10 Â
+			, uses relative dates:true Â
+			} Â
+			, column view options:{discloses preview pane:true Â
+			, shows icon:true Â
+			, shows icon preview:true Â
+			, shows preview column:true Â
+			, text size:10 Â
+			} Â
+			, icon view options:{arrangement:arranged by name Â
+			, icon size:72 Â
+			, label position:bottom Â
+			, shows item info:false Â
+			, shows icon preview:true Â
+			, text size:10 Â
+			} Â
 			}
 		
 		if (sidebar width of _win as number) < 1 then set (sidebar width of _settings) to missing value
