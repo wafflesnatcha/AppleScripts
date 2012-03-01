@@ -5,19 +5,10 @@ on run argv
 	tell application "AppleScript Editor"
 		tell front document
 			set _text to (contents of selection) as text
-			
 			if _text is not "" then return my multiLine(a reference to contents of selection)
-			
 		end tell
 	end tell
 end run
-
-on singleLine()
-	set _output to ""
-	get _text
-	return _text
-end singleLine
-
 
 on multiLine(_ref)
 	set _text to contents of _ref
@@ -40,10 +31,7 @@ on multiLine(_ref)
 					set BlockStartOffset to offset of "(*" in _text
 					--find last occurrence of "*)"
 					set SelectionLength to length of _text
-					set BlockEndOffset to SelectionLength - Â
-						(offset of ")*" in (reverse of (characters of _text) as text))
-					log {BlockStartOffset, BlockEndOffset, SelectionLength}
-					
+					set BlockEndOffset to SelectionLength - (offset of ")*" in (reverse of (characters of _text) as text))
 					if BlockStartOffset is less than BlockEndOffset then
 						if BlockStart then
 							--Block starts with "(*", but "*)" is somewhere before end of selection
@@ -67,14 +55,9 @@ on multiLine(_ref)
 					else
 						--Must be a request to add comment block
 						if the last character of _text is in {CR, NL} then
-							set contents of _ref to "(*" & return & Â
-								_text & Â
-								"*)" & return
+							set contents of _ref to "(*" & return & _text & "*)" & return
 						else
-							set contents of _ref to return & Â
-								"(*" & return & Â
-								_text & return & Â
-								"*)" & return
+							set contents of _ref to return & "(*" & return & _text & return & "*)" & return
 						end if
 					end if
 				end if

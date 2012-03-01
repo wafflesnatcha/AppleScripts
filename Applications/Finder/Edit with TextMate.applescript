@@ -21,6 +21,7 @@ on process(argv)
 	else
 		tell application "Finder" to set _files to selection as alias list
 	end if
+	if (count of _files) is less than 1 then return
 	
 	set _pathnames to ""
 	

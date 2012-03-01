@@ -21,8 +21,8 @@ end process
 on outputTextEdit(_content)
 	if application "TextEdit" is running then tell application "TextEdit" to make new document at the end of documents of it
 	tell application "TextEdit"
-		set text of front document to _content
 		activate
+		set text of front document to _content
 	end tell
 end outputTextEdit
 
