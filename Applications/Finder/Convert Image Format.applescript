@@ -125,7 +125,7 @@ on ImageMagick(_src, _dest, f)
 	set _out to quoted form of _dest
 	set _opts to ""
 	
-	if f = "JPEG" and not (my getQuality() as string = "false") then
+	if f = "JPEG" then if not (my getQuality() as string = "false") then
 		set _opts to _opts & " -quality " & result
 	else
 		return false
