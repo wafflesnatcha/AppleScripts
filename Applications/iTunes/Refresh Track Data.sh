@@ -13,7 +13,7 @@ cocoadialog="$(which CocoaDialog 2>/dev/null)"
 	(( count++ ))
 	[[ "$line" = "" ]] && continue
 	percent=$(echo "$count/$total_lines*100" | bc -l | xargs printf "%1.0f%%")
-	echo -n "$percent $percent "
+	echo -n "$percent [$percent]  "
 	osascript -sh -e "tell application \"iTunes\" to tell ${line} to return artist & \" - \" & name"
 	osascript -ss -e "tell application \"iTunes\" to tell ${line} to refresh"
 done; } | { [[ $cocoadialog ]] && "$cocoadialog" progressbar --title "Refresh Track Data..."; } ) &>/dev/null &

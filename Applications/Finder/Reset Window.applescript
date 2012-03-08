@@ -32,21 +32,21 @@ on process(argv)
 			, list view options:{calculates folder sizes:false Â
 			, icon size:small Â
 			, shows icon preview:true Â
-			, text size:10 Â
+			, text size:11 Â
 			, uses relative dates:true Â
 			} Â
 			, column view options:{discloses preview pane:true Â
 			, shows icon:true Â
 			, shows icon preview:true Â
 			, shows preview column:true Â
-			, text size:10 Â
+			, text size:11 Â
 			} Â
 			, icon view options:{arrangement:arranged by name Â
 			, icon size:72 Â
 			, label position:bottom Â
 			, shows item info:false Â
 			, shows icon preview:true Â
-			, text size:10 Â
+			, text size:11 Â
 			} Â
 			}
 		
