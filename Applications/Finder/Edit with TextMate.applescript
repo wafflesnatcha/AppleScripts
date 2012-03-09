@@ -5,7 +5,10 @@
 -- @author Scott Buchanan <buchanan.sc@gmail.com>
 *)
 
-property mate : "Contents/Resources/mate"
+property lib : load script POSIX path of (path to scripts folder) & "lib/lib.scpt"
+
+property _mate : "/Contents/Resources/mate"
+property _args : "-r"
 
 on run argv
 	my process(argv)
@@ -29,8 +32,7 @@ on process(argv)
 	end repeat
 	if _pathnames is "" then return
 	
-	-- In order to make sure we open files for EDITING in TextMate, we need to run mate (instead of doing just "open -a TextMate ...")
-	
-	set _app to POSIX path of (path to application "TextMate") as string
-	do shell script (quoted form of (_app & mate)) & _pathnames
+	--set _app to POSIX path of (path to application "TextMate") as string
+	set _app to pathToID("com.macromates.textmate") of _Application of lib
+	if _app is not missing value then do shell script (quoted form of (_app & _mate)) & "  " & _args & " " & _pathnames
 end process
