@@ -11,6 +11,6 @@ property Firefox : include("Application/Firefox") of lib
 on run argv
 	set _url to getURL() of Firefox
 	if _url is not false then
-		do shell script "bash -lc \"prowlnotify -a Firefox --url " & quoted form of _url & " \" &>/dev/null &"
+		do shell script "bash -lc \"prowlnotify -a Firefox --url " & quoted form of _url & " \""
 	end if
 end run
