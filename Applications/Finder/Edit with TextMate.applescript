@@ -7,6 +7,7 @@
 
 property lib : load script POSIX path of (path to scripts folder) & "lib/lib.scpt"
 
+property _app_path : missing value
 property _mate : "/Contents/Resources/mate"
 property _args : "-r"
 
@@ -32,7 +33,6 @@ on process(argv)
 	end repeat
 	if _pathnames is "" then return
 	
-	--set _app to POSIX path of (path to application "TextMate") as string
-	set _app to pathToID("com.macromates.textmate") of _Application of lib
-	if _app is not missing value then do shell script (quoted form of (_app & _mate)) & "  " & _args & " " & _pathnames
+	if _app_path is missing value then set _app_path to pathToID("com.macromates.textmate") of _Application of lib
+	if _app_path is not missing value then do shell script (quoted form of (_app_path & _mate)) & "  " & _args & " " & _pathnames
 end process
