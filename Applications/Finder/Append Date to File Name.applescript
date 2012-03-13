@@ -25,6 +25,11 @@ on process(argv)
 		tell application "Finder" to set _files to selection as alias list
 	end if
 	
+	if (count of _files) is less than 1 then
+		tell application "System Events" to display alert "Error" message "No files selected" as warning
+		return
+	end if
+	
 	set date_stamp to getDateStamp()
 	
 	tell application "Finder"
