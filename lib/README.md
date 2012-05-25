@@ -4,8 +4,7 @@
 
 ## Examples
 
-(Assuming lib.scpt is in ~/Library/Scripts/lib)
-
+*(Assuming lib.scpt is in ~/Library/Scripts/lib)*
 
 **Basic Usage:**
 
