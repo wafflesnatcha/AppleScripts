@@ -10,20 +10,26 @@ property lib : load script (POSIX path of (path to scripts folder) & "lib/lib.sc
 property application_process_properties : {"accepts high level events", "accepts remote events", "accessibility description", "application file", "architecture", "background only", "bundle identifier", "class", "Classic", "creator type", "description", "displayed name", "enabled", "entire contents", "file type", "file", "focused", "frontmost", "has scripting terminology", "help", "id", "maximum value", "minimum value", "name", "orientation", "partition space used", "position", "role description", "role", "selected", "short name", "size", "subrole", "title", "total partition size", "unix id", "value", "visible"}
 
 on run argv
-	my process(argv)
-end run
-
-on process(argv)
+	global _output_document
+	set _output_document to missing value
+	
 	set _process to frontmostApplicationProcess() of _UI of lib
 	set output to probeApplicationProcess(_process)
 	my outputTextEdit(output)
-end process
+end run
 
 on outputTextEdit(_content)
-	if application "TextEdit" is running then tell application "TextEdit" to make new document at the end of documents of it
+	global _output_document
+	if _output_document is missing value then
+		tell application "System Events" to set _running to (name of processes) contains "TextEdit"
+		tell application "TextEdit"
+			if _running then make new document at the end of documents of it
+			set _output_document to front document
+		end tell
+	end if
 	tell application "TextEdit"
 		activate
-		set text of front document to _content
+		set text of _output_document to _content
 	end tell
 end outputTextEdit
 
