@@ -14,7 +14,7 @@ set front_app to frontmostApplication() of _UI of lib
 display alert (name of front_app as string)
 ```
 
-**Including an application library**
+**Including an application library:**
 
 ```applescript
 property lib : load script POSIX path of (path to scripts folder) & "lib/lib.scpt"
