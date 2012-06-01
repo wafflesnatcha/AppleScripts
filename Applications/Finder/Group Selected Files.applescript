@@ -4,6 +4,7 @@
 -- @author Scott Buchanan <buchanan.sc@gmail.com>
 -- @link http://wafflesnatcha.github.com
 *)
+
 tell application "Finder"
 	set _files to selection as alias list
 	if _files is {} then return

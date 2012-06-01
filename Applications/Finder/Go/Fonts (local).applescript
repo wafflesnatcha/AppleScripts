@@ -1,5 +1,5 @@
 tell application "System Events" to try
-	set _path to (path of downloads folder of user domain) as string
+	set _path to (path of fonts folder of local domain) as string
 on error
 	return
 end try

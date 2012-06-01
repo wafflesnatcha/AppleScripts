@@ -1,6 +1,17 @@
-property Finder : load script POSIX path of (path to scripts folder) & "lib/Application/Finder.scpt"
-try
-	tell application "System Events" to go(path of favorites folder) of Finder
-on error error_message number error_number
-	display alert error_message as warning
+tell application "System Events" to try
+	set _path to (path of favorites folder) as string
+on error
+	return
 end try
+tell application "Finder"
+	activate
+	try
+		tell the front Finder window to if toolbar visible then
+			set target to _path
+		else
+			open _path
+		end if
+	on error
+		open _path
+	end try
+end tell
