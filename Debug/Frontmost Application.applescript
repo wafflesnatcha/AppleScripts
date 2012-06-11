@@ -7,7 +7,45 @@
 *)
 property lib : load script (POSIX path of (path to scripts folder) & "lib/lib.scpt")
 
-property application_process_properties : {"accepts high level events", "accepts remote events", "accessibility description", "application file", "architecture", "background only", "bundle identifier", "class", "Classic", "creator type", "description", "displayed name", "enabled", "entire contents", "file type", "file", "focused", "frontmost", "has scripting terminology", "help", "id", "maximum value", "minimum value", "name", "orientation", "partition space used", "position", "role description", "role", "selected", "short name", "size", "subrole", "title", "total partition size", "unix id", "value", "visible"}
+property application_process_properties : {Â
+	"accepts high level events", Â
+	"accepts remote events", Â
+	"accessibility description", Â
+	"application file", Â
+	"architecture", Â
+	"background only", Â
+	"bundle identifier", Â
+	"class", Â
+	"Classic", Â
+	"creator type", Â
+	"description", Â
+	"displayed name", Â
+	"enabled", Â
+	"entire contents", Â
+	"file", Â
+	"file type", Â
+	"focused", Â
+	"frontmost", Â
+	"has scripting terminology", Â
+	"help", Â
+	"id", Â
+	"maximum value", Â
+	"minimum value", Â
+	"name", Â
+	"orientation", Â
+	"partition space used", Â
+	"position", Â
+	"role description", Â
+	"role", Â
+	"selected", Â
+	"short name", Â
+	"size", Â
+	"subrole", Â
+	"title", Â
+	"total partition size", Â
+	"unix id", Â
+	"value", Â
+	"visible"}
 
 on run argv
 	global _output_document
@@ -15,34 +53,38 @@ on run argv
 	
 	set _process to frontmostApplicationProcess() of _UI of lib
 	set output to probeApplicationProcess(_process)
-	my outputTextEdit(output)
+	do shell script "echo " & quoted form of output & " | open -f"
 end run
 
-on outputTextEdit(_content)
-	global _output_document
-	if _output_document is missing value then
-		tell application "System Events" to set _running to (name of processes) contains "TextEdit"
-		tell application "TextEdit"
-			if _running then make new document at the end of documents of it
-			set _output_document to front document
-		end tell
-	end if
-	tell application "TextEdit"
-		activate
-		set text of _output_document to _content
-	end tell
-end outputTextEdit
-
 on probeApplicationProcess(_process)
+	set _pad_length to 0
+	repeat with _item in every item of application_process_properties
+		if (count of _item) > _pad_length then set _pad_length to (count of _item)
+	end repeat
+	
 	set output to ""
 	tell application "System Events"
 		set _process to first application process whose frontmost is true
 		set p to properties of _process
 		
-		set l to {accepts high level events of p, accepts remote events of p, accessibility description of p, application file of p, architecture of p, background only of p, bundle identifier of p, class of p, Classic of p, creator type of p, description of p, displayed name of p, enabled of p, entire contents of p, file type of p, file of p, focused of p, frontmost of p, has scripting terminology of p, help of p, id of p, maximum value of p, minimum value of p, name of p, orientation of p, partition space used of p, position of p, role description of p, role of p, selected of p, short name of p, size of p, subrole of p, title of p, total partition size of p, unix id of p, value of p, visible of p}
+		set l to {accepts high level events of p, accepts remote events of p, accessibility description of p, application file of p, architecture of p, background only of p, bundle identifier of p, class of p, Classic of p, creator type of p, description of p, displayed name of p, enabled of p, entire contents of p, file of p, file type of p, focused of p, frontmost of p, has scripting terminology of p, help of p, id of p, maximum value of p, minimum value of p, name of p, orientation of p, partition space used of p, position of p, role description of p, role of p, selected of p, short name of p, size of p, subrole of p, title of p, total partition size of p, unix id of p, value of p, visible of p}
 		
 		repeat with i from 1 to the (count of application_process_properties)
-			set output to output & (item i of application_process_properties) & ": " & (item i of l) & "\n"
+			set _key to item i of application_process_properties
+			set _val to (item i of l)
+			set _class to (class of _val)
+			
+			set _line to padRight(_key, " ", _pad_length) of _Text of lib & " :"
+			-- Add class information
+			(*
+			if (_val is not missing value) then
+				set _line to _line & " [" & _class
+				if (_class is list or _class is text) then set _line to _line & "(" & (length of _val) & ")"
+				set _line to _line & "]"
+			end if
+*)
+			set _line to _line & " " & (_val as string)
+			set output to output & _line & return
 		end repeat
 	end tell
 	return output
