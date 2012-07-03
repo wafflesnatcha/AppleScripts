@@ -35,8 +35,8 @@ property application_process_properties : {Â
 	"orientation", Â
 	"partition space used", Â
 	"position", Â
-	"role description", Â
 	"role", Â
+	"role description", Â
 	"selected", Â
 	"short name", Â
 	"size", Â
@@ -67,23 +67,27 @@ on probeApplicationProcess(_process)
 		set _process to first application process whose frontmost is true
 		set p to properties of _process
 		
-		set l to {accepts high level events of p, accepts remote events of p, accessibility description of p, application file of p, architecture of p, background only of p, bundle identifier of p, class of p, Classic of p, creator type of p, description of p, displayed name of p, enabled of p, entire contents of p, file of p, file type of p, focused of p, frontmost of p, has scripting terminology of p, help of p, id of p, maximum value of p, minimum value of p, name of p, orientation of p, partition space used of p, position of p, role description of p, role of p, selected of p, short name of p, size of p, subrole of p, title of p, total partition size of p, unix id of p, value of p, visible of p}
+		set l to {accepts high level events of p, accepts remote events of p, accessibility description of p, application file of p, architecture of p, background only of p, bundle identifier of p, class of p, Classic of p, creator type of p, description of p, displayed name of p, enabled of p, entire contents of p, file of p, file type of p, focused of p, frontmost of p, has scripting terminology of p, help of p, id of p, maximum value of p, minimum value of p, name of p, orientation of p, partition space used of p, position of p, role of p, role description of p, selected of p, short name of p, size of p, subrole of p, title of p, total partition size of p, unix id of p, value of p, visible of p}
 		
 		repeat with i from 1 to the (count of application_process_properties)
 			set _key to item i of application_process_properties
 			set _val to (item i of l)
-			set _class to (class of _val)
+			set _class to (class of _val as text)
 			
-			set _line to padRight(_key, " ", _pad_length) of _Text of lib & " :"
-			-- Add class information
-			(*
-			if (_val is not missing value) then
-				set _line to _line & " [" & _class
-				if (_class is list or _class is text) then set _line to _line & "(" & (length of _val) & ")"
-				set _line to _line & "]"
+			set _line to padRight(_key, " ", _pad_length) of _Text of lib & " : "
+			
+			if _val is missing value or (indexOf({"boolean", "integer", "class"}, _class) of _List of lib > -1) then
+				set _line to _line & (_val as string)
+			else if _class is "list" then
+				set _line to _line & "{" & (_val as string) & "}"
+			else if _class is "text" then
+				set _line to _line & "\"" & (_val as string) & "\""
+			else if _class is "alias" then
+				set _line to _line & _class & " \"" & (_val as string) & "\""
+			else
+				set _line to _line & _class & " " & (_val as string)
 			end if
-*)
-			set _line to _line & " " & (_val as string)
+			
 			set output to output & _line & return
 		end repeat
 	end tell
