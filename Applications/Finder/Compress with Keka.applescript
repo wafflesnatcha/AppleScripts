@@ -7,7 +7,7 @@
 
 tell application "Finder"
 	set _files to selection as alias list
-	if _files is {} then return display alert "Nothing selected!" as warning giving up after 5
+	if _files is {} then return display alert "No files selected!" as warning giving up after 5
 	set _pathnames to ""
 	repeat with f in _files
 		set _pathnames to _pathnames & " " & quoted form of POSIX path of (f as alias)
