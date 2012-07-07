@@ -48,9 +48,6 @@ property application_process_properties : {Â
 	"visible"}
 
 on run argv
-	global _output_document
-	set _output_document to missing value
-	
 	set _process to frontmostApplicationProcess() of _UI of lib
 	set output to probeApplicationProcess(_process)
 	do shell script "echo " & quoted form of output & " | open -f"
@@ -76,19 +73,17 @@ on probeApplicationProcess(_process)
 			
 			set _line to padRight(_key, " ", _pad_length) of _Text of lib & " : "
 			
-			if _val is missing value or (indexOf({"boolean", "integer", "class"}, _class) of _List of lib > -1) then
+			if _val is missing value or _class is "boolean" or _class is "integer" or _class is "class" then
 				set _line to _line & (_val as string)
 			else if _class is "list" then
 				set _line to _line & "{" & (_val as string) & "}"
 			else if _class is "text" then
 				set _line to _line & "\"" & (_val as string) & "\""
-			else if _class is "alias" then
-				set _line to _line & _class & " \"" & (_val as string) & "\""
 			else
-				set _line to _line & _class & " " & (_val as string)
+				set _line to _line & _class & " \"" & (_val as string) & "\""
 			end if
 			
-			set output to output & _line & return
+			set output to output & _line & linefeed
 		end repeat
 	end tell
 	return output
