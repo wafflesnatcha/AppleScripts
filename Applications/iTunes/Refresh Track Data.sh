@@ -9,7 +9,7 @@ total_lines=$(echo "$input" | wc -l)
 
 cocoadialog="$(which cocoaDialog 2>/dev/null)"
 [[ $cocoadialog && ! $TERM =~ ^xterm* ]] \
-	&& outcmd="$cocoadialog progressbar --title 'Refresh Track Data...' --icon Music" \
+	&& outcmd="$cocoadialog progressbar --title '$(basename "$0" | sed -E 's/^(.*)\.[^\.]*$/\1/g')' --icon Music" \
 	|| outcmd="cat -"
 
 ( echo "$input" | { while read line; do
@@ -19,5 +19,5 @@ cocoadialog="$(which cocoaDialog 2>/dev/null)"
 	echo -n "$percent "
 	osascript -sh -e "tell application \"iTunes\" to tell ${line} to return artist & \" - \" & name"
 	osascript -ss -e "tell application \"iTunes\" to tell ${line} to refresh"
-done; } | $outcmd ) &
+done; } | bash -lc "$outcmd" ) &
 

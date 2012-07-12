@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
-FAIL() {
-	if [[ $1 ]]; then
+filetypes="apng|bmp|gif|jpg|jpeg|pdf|png|tiff|xcf"
+
+ERROR() {
+	[[ $1 ]] && {
+		echo "${0##*/}: $1" 1>&2
 		osascript -e 'tell application "System Events" to display alert "Error" message "'"$1"'" as warning buttons {"OK"} default button 1' &>/dev/null &
-		echo "$1" >&2;
-	fi
-	exit ${2:-0};
+	}
+	[[ $2 > -1 ]] && exit $2;
 }
 
 imgur() {
@@ -14,10 +16,15 @@ imgur() {
 	[[ $? = 0 && $url ]] && { echo "$url"; return; } || { echo "$result" | perl -ne 'print if s/.*<message>(.*)<\/message>.*/\1/i' >&2; return 1; }
 }
 
+
+# Get first selected file in Finder
 file="$(osascript -e 'tell application "Finder" to get POSIX path of (first item of (selection as alias list))')"
-[[ ${file##*.} =~ ^(apng|bmp|gif|jpg|jpeg|pdf|png|tiff|xcf)$ ]] || FAIL "invalid filetype [$file]"
 
-result="$(imgur "$file" 2>&1)" || FAIL "$result"
-echo "$result" && echo "$result" | pbcopy && open "$result"
+# Make sure it's the right file type
+[[ $(echo "${file##*.}" | tr "[:upper:]" "[:lower:]") =~ ^($filetypes)$ ]] \
+	|| ERROR "$file: invalid file" 2
 
-
+result="$(imgur "$file")" || ERROR "$result" 2
+echo "$result"
+echo "$result" | pbcopy
+open "$result"
