@@ -3,11 +3,13 @@
 filetypes="apng|bmp|gif|jpg|jpeg|pdf|png|tiff|xcf"
 
 ERROR() {
-	[[ $1 ]] && {
-		echo "${0##*/}: $1" 1>&2
-		osascript -e 'tell application "System Events" to display alert "Error" message "'"$1"'" as warning buttons {"OK"} default button 1' &>/dev/null &
-	}
-	[[ $2 > -1 ]] && exit $2;
+	if [[ $TERM = "dumb" ]]; then
+		[[ $1 ]] && osascript -e 'tell application "System Events" to display alert "Error" message "'"$1"'" as warning buttons {"OK"} default button 1' &>/dev/null & \
+		[[ $2 > -1 ]] && exit
+	else
+		[[ $1 ]] && echo "${0##*/}: $1" 1>&2
+		[[ $2 > -1 ]] && exit $2
+	fi
 }
 
 imgur() {
@@ -15,7 +17,6 @@ imgur() {
 	local url=$(echo -e "$result" | perl -ne 'print if s/.*<original>(http:\/\/i.imgur.com\/[^<]*)<\/original>.*/\1/i')
 	[[ $? = 0 && $url ]] && { echo "$url"; return; } || { echo "$result" | perl -ne 'print if s/.*<message>(.*)<\/message>.*/\1/i' >&2; return 1; }
 }
-
 
 # Get first selected file in Finder
 file="$(osascript -e 'tell application "Finder" to get POSIX path of (first item of (selection as alias list))')"
