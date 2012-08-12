@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
-osascript <<EOF &>/dev/null &
-tell current application
+osascript <<EOF &
+tell application "System Events"
 	activate
-	choose color
+	try
+		return choose color default color argv
+	on error
+		return choose color
+	end try
 end tell
 EOF
