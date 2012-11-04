@@ -1,5 +1,5 @@
 (*
--- Show Meta-data
+-- Show Metadata
 --
 -- @author Scott Buchanan <buchanan.sc@gmail.com>
 -- @link http://wafflesnatcha.github.com
