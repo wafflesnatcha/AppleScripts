@@ -19,5 +19,5 @@ cocoadialog="$(which cocoaDialog 2>/dev/null)"
 if [[ ! $cocoadialog || $TERM =~ ^xterm ]]; then
 	refresh
 else
-	refresh --dialog | $cocoadialog progressbar --title "$(basename "$0" | sed -E 's/^(.*)\.[^\.]*$/\1/g')" --text "Starting..." --icon Music --stoppable &
+	refresh | $cocoadialog progressbar --title "$(basename "$0" | sed -E 's/^(.*)\.[^\.]*$/\1/g')" --text "Starting..." --icon Music --stoppable &
 fi
