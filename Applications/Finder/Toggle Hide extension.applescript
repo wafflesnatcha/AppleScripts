@@ -1,8 +1,7 @@
 (*
 -- Toggle "Hide extension" of the selected files in Finder
 --
--- @author Scott Buchanan <buchanan.sc@gmail.com>
--- @link http://wafflesnatcha.github.com
+-- @author Scott Buchanan <http://wafflesnatcha.github.com>
 *)
 
 tell application "Finder"
