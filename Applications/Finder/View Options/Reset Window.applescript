@@ -1,14 +1,14 @@
 (*
 -- Change the display of the front most Finder window to your own preconfigured settings.
 --
--- @author Scott Buchanan <buchanan.sc@gmail.com>
+-- @author Scott Buchanan
 -- @link http://wafflesnatcha.github.com
 *)
 
 property E : missing value
 
 using terms from application "Finder"
-	property _settings : {current view:E, width:620, height:390, sidebar width:E, statusbar visible:true, toolbar visible:true, zoomed:E Â
+	property _settings : {current view:E, width:608, height:390, sidebar width:E, statusbar visible:true, toolbar visible:true, zoomed:E Â
 		, list view options:{calculates folder sizes:false, icon size:small, shows icon preview:true, text size:10, uses relative dates:true, |columns|:{{class:column, name:modification date column, index:E, sort direction:E, width:128, visible:E}}} Â
 		, column view options:{discloses preview pane:true, shows icon:true, shows icon preview:true, shows preview column:true, text size:10} Â
 		, icon view options:{arrangement:arranged by name, icon size:96, label position:bottom, shows item info:false, shows icon preview:true, text size:10} Â
