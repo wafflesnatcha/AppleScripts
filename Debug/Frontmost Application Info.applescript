@@ -66,7 +66,7 @@ on probeApplicationProcess()
 			set _val to item i of l
 			set _class to class of _val as text
 			
-			set _line to padRight(_key, " ", _pad_length) & " : "
+			set _line to my padRight(_key, " ", _pad_length) & " : "
 			
 			if _val is missing value or _class is "boolean" or _class is "integer" or _class is "class" then
 				set _line to _line & (_val as string)
